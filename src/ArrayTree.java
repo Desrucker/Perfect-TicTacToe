@@ -30,9 +30,9 @@ public class ArrayTree<E> {
     }
 
     // Return the parent index of the node at index n
-    public int parent(int n) {
-        if (n == 0) return -1; // Root node has no parent, return -1
-        return (n - 1) / order; // Calculate parent index based on the order
+    public int parent(int p) {
+        if (p == 0) return -1; // Root node has no parent, return -1
+        return (p - 1) / order; // Calculate parent index based on the order
     }
 
     // Calculate the index of a child given a parent index and child index
@@ -61,6 +61,14 @@ public class ArrayTree<E> {
         return 0; // Return the index of the root
     }
 
+    // Get the element at a specific position
+    public E get(int pos) {
+        if (pos < 0 || pos >= count) {
+            throw new IndexOutOfBoundsException("Invalid position: " + pos); // Handle invalid position
+        }
+        return array.get(pos); // Return the element at the specified position
+    }
+
     // Add a child to a parent node
     public void addChild(int parentIndex, int childIndex, E e) {
         int pos = parentIndex * order + childIndex + 1; // Calculate the position in the array
@@ -83,14 +91,6 @@ public class ArrayTree<E> {
             throw new IndexOutOfBoundsException("Child does not exist"); // Handle invalid index
         }
         return array.get(childIndex); // Return the child element from the array
-    }
-
-    // Get the element at a specific position
-    public E get(int pos) {
-        if (pos < 0 || pos >= count) {
-            throw new IndexOutOfBoundsException("Invalid position: " + pos); // Handle invalid position
-        }
-        return array.get(pos); // Return the element at the specified position
     }
 
     // Convert the tree to a string representation for easy viewing
