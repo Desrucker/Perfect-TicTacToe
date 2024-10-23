@@ -4,8 +4,8 @@ public class GenTree {
 
     // Inner class to represent Tic-Tac-Toe positions with board state and valuation
     public static class TicTacToePositions {
-        private String board; // Stores the board configuration as a string
-        private int valuation; // Stores the valuation of the position
+        private String board;
+        private int valuation;
 
         // Constructor initializes the board with a string and sets the valuation to 0
         public TicTacToePositions(String s) {
@@ -49,34 +49,38 @@ public class GenTree {
 
     // Method to generate child positions for a given parent position and the current player
     public void expandGameTree(int parentIndex, char player) {
-        // Get the board configuration of the parent position
         String parentBoard = gameTree[parentIndex].getBoard();
-        char[] parentArray = parentBoard.toCharArray(); // Convert board string to char array
 
-        // Loop through each cell in the parent board to find empty spaces
-        for (int i = 0; i < parentArray.length; i++) {
-            if (parentArray[i] == ' ') { // Check if the cell is empty
-                // Create a copy of the parent board and make the current player's move
-                char[] childArray = Arrays.copyOf(parentArray, parentArray.length);
-                childArray[i] = player;
+        // Loop through each cell to find empty spaces and generate child positions
+        for (int i = 0; i < parentBoard.length(); i++) {
+            if (parentBoard.charAt(i) == ' ') {
+                String childBoard = generateChildBoard(parentBoard, i, player);
+                int childIndex = calculateChildIndex(parentIndex, i);
 
-                // Convert the updated char array back to a string for the child board
-                String childBoard = new String(childArray);
-
-                // Calculate the index for the child position in the gameTree array
-                int childIndex = parentIndex * 9 + i + 1;
-
-                // Create a new Tic-Tac-Toe position for the child board and store it in the array
                 gameTree[childIndex] = new TicTacToePositions(childBoard);
 
-                // Recursively generate children for the next player ('O' if current player is 'X')
-                if (player == 'X') {
-                    expandGameTree(childIndex, 'O');
-                }
+                // Recursively generate children for the other player
+                expandGameTree(childIndex, switchPlayer(player));
             }
         }
     }
 
+    // Generates a new board with the player's move at the given index.
+    private String generateChildBoard(String board, int index, char player) {
+        char[] childArray = board.toCharArray();
+        childArray[index] = player;
+        return new String(childArray);
+    }
+
+    // Calculates the index for the child position in the game tree.
+    private int calculateChildIndex(int parentIndex, int moveIndex) {
+        return parentIndex * 9 + moveIndex + 1;
+    }
+
+    // Switches the current player between 'X' and 'O'.
+    private char switchPlayer(char player) {
+        return (player == 'X') ? 'O' : 'X';
+    }
 
     // Main method to run the program
     public static void main(String[] args) {
