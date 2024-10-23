@@ -87,9 +87,9 @@ public class GenTree {
 
         // Print the first 100 positions in the gameTree array
         for (int i = 0; i < 100; i++) {
-            TicTacToePositions t = genTree.get(i);
-            if (t != null)
-                System.out.printf("%2d) %s\n", i, t.getBoard()); // Print the index and board configuration
+            TicTacToePositions position = genTree.get(i);
+            if (position != null)
+                System.out.printf("%2d) %s\n", i, position.getBoard()); // Print the index and board configuration
             else
                 System.out.printf("%2d) Empty\n", i); // Print 'Empty' for null positions
         }
