@@ -1,117 +1,117 @@
 import java.util.ArrayList;
 
 public class ArrayTree<E> {
-    private ArrayList<E> array; // Storage for the elements in the tree
-    private int count; // Current number of elements in the tree
-    private int capacity; // Maximum capacity of the tree
-    private int order; // Number of children per node
+    private ArrayList<E> array; // Storage for tree elements
+    private int count; // Number of elements
+    private int capacity; // Max capacity
+    private int order; // Children per node
 
-    // Default constructor with order 2 and capacity 1000
+    // Default constructor (order 2, capacity 1000)
     public ArrayTree() {
-        this(2, 1000); // Initialize with default order and capacity
+        this(2, 1000); // Initialize defaults
     }
 
     // Constructor with specified order and capacity
     public ArrayTree(int order, int cap) {
-        this.order = order; // Set the number of children per node
-        this.capacity = cap; // Set the maximum capacity of the tree
-        this.count = 0; // Initialize element count to zero
-        this.array = new ArrayList<>(capacity); // Create the ArrayList with initial capacity
+        this.order = order; // Set order
+        this.capacity = cap; // Set capacity
+        this.count = 0; // Initialize count
+        this.array = new ArrayList<>(capacity); // Create array list
 
-        // Initialize the ArrayList with nulls to match the capacity
+        // Fill array with nulls
         for (int i = 0; i < capacity; i++) {
-            array.add(null); // Fill the array with nulls to indicate empty slots
+            array.add(null); // Empty slots
         }
     }
 
-    // Return the index of the root node
+    // Return root index
     public int root() {
-        return count > 0 ? 0 : -1; // Return 0 if the tree is not empty, otherwise return -1
+        return count > 0 ? 0 : -1; // 0 if not empty, else -1
     }
 
-    // Return the parent index of the node at index n
+    // Return parent index of node at index p
     public int parent(int p) {
-        if (p == 0) return -1; // Root node has no parent, return -1
-        return (p - 1) / order; // Calculate parent index based on the order
+        if (p == 0) return -1; // No parent for root
+        return (p - 1) / order; // Calculate parent index
     }
 
-    // Calculate the index of a child given a parent index and child index
+    // Calculate child index from parent and child index
     public int child(int p, int c) {
-        int childIndex = order * p + c + 1; // Calculate child index based on parent index and child index
-        return childIndex < capacity ? childIndex : -1; // Return child index if within capacity, otherwise return -1
+        int childIndex = order * p + c + 1; // Calculate child index
+        return childIndex < capacity ? childIndex : -1; // Check bounds
     }
 
-    // Return the current number of elements in the tree
+    // Return number of elements in the tree
     public int size() {
-        return count; // Return the number of elements currently in the tree
+        return count; // Current element count
     }
 
     // Check if the tree is empty
     public boolean isEmpty() {
-        return count == 0; // Return true if there are no elements in the tree
+        return count == 0; // True if no elements
     }
 
-    // Add the root element to the tree
+    // Add root element
     public int addRoot(E e) {
         if (count > 0) {
-            throw new IllegalStateException("Root already exists"); // Prevent adding a root if one exists
+            throw new IllegalStateException("Root already exists"); // Prevent duplicate root
         }
-        array.set(0, e); // Set the root element at index 0
-        count = 1; // Update the count of elements
-        return 0; // Return the index of the root
+        array.set(0, e); // Set root
+        count = 1; // Update count
+        return 0; // Return root index
     }
 
-    // Get the element at a specific position
+    // Get element at specific position
     public E get(int pos) {
         if (pos < 0 || pos >= count) {
             throw new IndexOutOfBoundsException("Invalid position: " + pos); // Handle invalid position
         }
-        return array.get(pos); // Return the element at the specified position
+        return array.get(pos); // Return element
     }
 
     // Add a child to a parent node
     public void addChild(int parentIndex, int childIndex, E e) {
-        int pos = parentIndex * order + childIndex + 1; // Calculate the position in the array
+        int pos = parentIndex * order + childIndex + 1; // Calculate position
         if (pos >= capacity) {
-            throw new IllegalArgumentException("Tree capacity exceeded"); // Check if adding exceeds capacity
+            throw new IllegalArgumentException("Tree capacity exceeded"); // Check capacity
         }
-        // Only set the child if the position is empty
+        // Set child if empty
         if (array.get(pos) == null) {
-            array.set(pos, e); // Assign the element to the calculated position
-            count++; // Increment the count of elements
+            array.set(pos, e); // Assign element
+            count++; // Increment count
         } else {
-            throw new IllegalArgumentException("Child already exists at this position"); // Prevent overwriting
+            throw new IllegalArgumentException("Child already exists at this position"); // Prevent overwrite
         }
     }
 
-    // Get the element stored in the c-th child of a parent node
+    // Get child element of a parent node
     public E getChild(int parentIndex, int c) {
-        int childIndex = child(parentIndex, c); // Get the child index
+        int childIndex = child(parentIndex, c); // Get child index
         if (childIndex == -1) {
             throw new IndexOutOfBoundsException("Child does not exist"); // Handle invalid index
         }
-        return array.get(childIndex); // Return the child element from the array
+        return array.get(childIndex); // Return child element
     }
 
-    // Convert the tree to a string representation for easy viewing
+    // Convert tree to string representation
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(); // Create a StringBuilder for efficient string concatenation
-        sb.append("[ArrayTree: order=").append(order) // Append order information
-                .append(", count=").append(count) // Append current count of elements
-                .append(", size=").append(capacity) // Append capacity of the tree
+        StringBuilder sb = new StringBuilder(); // For string building
+        sb.append("[ArrayTree: order=").append(order) // Append order
+                .append(", count=").append(count) // Append count
+                .append(", size=").append(capacity) // Append capacity
                 .append(", array={");
 
-        // Append elements of the array to the string representation
+        // Append elements to string
         for (int i = 0; i < capacity; i++) {
             if (array.get(i) != null) {
-                sb.append(array.get(i)).append(" "); // Append actual values
+                sb.append(array.get(i)).append(" "); // Append values
             } else {
-                sb.append("- "); // Append dash for empty slots
+                sb.append("- "); // Empty slot
             }
         }
-        sb.append("}]"); // Close the string representation
+        sb.append("}]"); // Close representation
 
-        return sb.toString().trim(); // Return the formatted string without trailing whitespace
+        return sb.toString().trim(); // Return formatted string
     }
 }
