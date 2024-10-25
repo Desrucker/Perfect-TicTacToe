@@ -94,7 +94,7 @@ The AI always chooses the move with the highest score to maximize its chance of 
 
 ## **Requirements**
 
-- **Java Development Kit (JDK)** 8 or later.
+- **Java Development Kit (JDK)** 17 or later.
 - Terminal or **IDE** (like IntelliJ IDEA, Eclipse, or VS Code).
 
 ---
