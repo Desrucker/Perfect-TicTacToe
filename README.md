@@ -20,9 +20,9 @@ You play as **Player X**. Use the **reference board** below to select your move 
 
 ```
  0 | 1 | 2
-------------
+-----------
  3 | 4 | 5
-------------
+-----------
  6 | 7 | 8
 ```
 
@@ -30,9 +30,9 @@ You play as **Player X**. Use the **reference board** below to select your move 
 
 ```
  X | O | X
-------------
+-----------
  O | X | -
-------------
+-----------
  - | O | X
 ```
 
