@@ -111,7 +111,7 @@ public class TicTacToe {
         return mainDiagonalWin || antiDiagonalWin; // Return true if either diagonal has a win
     }
 
-    // Checks if the board is full (no empty spaces)
+    // Checks if the board is full
     private boolean isBoardFull() {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
