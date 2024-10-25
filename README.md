@@ -1,7 +1,7 @@
 
 # **Perfect TicTacToe**
 
-![Java](https://img.shields.io/badge/Java-11%2B-blue.svg)  
+![Java](https://img.shields.io/badge/Java-17%2B-blue.svg)  
 A command-line **Tic-Tac-Toe** game in Java where the player faces off against an AI using the **minimax algorithm** for perfect play.
 
 ---
