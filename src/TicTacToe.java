@@ -196,7 +196,8 @@ public class TicTacToe {
 
     // Checks if the game is over
     public boolean isGameOver() {
-        return checkWin(PLAYER_X) || checkWin(PLAYER_O) || isBoardFull(); // Check win conditions or full board
+        // Check win conditions or full board
+        return checkWin(PLAYER_X) || checkWin(PLAYER_O) || isBoardFull();
     }
 
     // Main method to run the game
