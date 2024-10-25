@@ -8,6 +8,7 @@ src/GenTree.java
 src/ArrayTree.java
 src/TestTreeADT.java
 .idea/
+*.iml
 
 ### Eclipse ###
 .apt_generated

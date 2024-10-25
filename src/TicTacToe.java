@@ -222,7 +222,7 @@ public class TicTacToe {
 
                         if (position < 0 || position >= 9) {
                             System.out.println("Out of range, please enter a number between 0 and 8.");
-                            continue;
+                            continue; // Skip to next iteration if out of range
                         }
 
                         validMove = game.makeMove(position, PLAYER_X); // Attempt move
