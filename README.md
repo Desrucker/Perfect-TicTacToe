@@ -46,7 +46,7 @@ You play as **Player X**. Use the **reference board** below to select your move 
 
 1. **Clone the Repository:**
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/Desrucker/Perfect-TicTacToe
    cd Perfect-TicTacToe
    ```
 
