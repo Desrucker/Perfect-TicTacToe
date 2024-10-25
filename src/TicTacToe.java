@@ -209,8 +209,8 @@ public class TicTacToe {
 
         // Main game loop
         while (!game.isGameOver()) {
-            int position;
-            boolean validMove;
+            int position = -1;
+            boolean validMove = false;
 
             // Prompt user for their move
             System.out.println("Your move (X):");
