@@ -200,6 +200,7 @@ public class TicTacToe {
     }
 
     // Main method to run the game
+// Main method to run the game
     public static void main(String[] args) {
         System.out.println("Perfect TicTacToe - Dominic Rucker\n");
         TicTacToe game = new TicTacToe(); // Create a new TicTacToe game instance
@@ -208,39 +209,43 @@ public class TicTacToe {
 
         // Main game loop
         while (!game.isGameOver()) {
+            int position;
+            boolean validMove;
+
             // Prompt user for their move
             System.out.println("Your move (X):");
-            System.out.print("What position (0-8)? ");
-            int position;
-            boolean validMove = false;
 
             // Validate user input until a valid move is made
-            while (!validMove) {
+            do {
+                System.out.print("What position (0-8)? ");
                 position = scanner.nextInt(); // Get user input
                 validMove = game.makeMove(position, PLAYER_X); // Try to make the move
                 if (!validMove) { // If move is invalid, prompt again
                     System.out.println("That position is already taken.");
-                    System.out.print("What position (0-8)? ");
                 }
-            }
+            } while (!validMove);
             System.out.println();
 
-            // AI makes its move
-            if (game.isGameOver()) break; // Check if the game is over after player move
-            game.makeAIMove(); // AI makes a move
+            // Check if game is over after player's move
+            if (game.isGameOver()) break;
 
-            game.printBoard(); // Print the current board state
+            // AI makes its move
+            game.makeAIMove();
+
+            // Print the current board state
+            game.printBoard();
         }
 
         // Determine the result of the game
         if (game.checkWin(PLAYER_X)) {
-            System.out.println("Player X wins"); // Player X wins
+            System.out.println("Player X wins");
         } else if (game.checkWin(PLAYER_O)) {
-            System.out.println("Player O wins"); // Player O wins
+            System.out.println("Player O wins");
         } else {
-            System.out.println("It's a draw"); // Game is a draw
+            System.out.println("It's a draw");
         }
 
-        scanner.close(); // Close the scanner
+        // Close the scanner
+        scanner.close();
     }
 }
