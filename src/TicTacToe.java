@@ -160,7 +160,7 @@ public class TicTacToe {
         // Check for terminal states
         if (checkWin(PLAYER_X)) return -1; // If X wins, return negative score
         if (checkWin(PLAYER_O)) return 1;  // If O wins, return positive score
-        if (isBoardFull()) return 0;        // If it's a draw, return 0
+        if (isBoardFull()) return 0;       // If it's a draw, return 0
 
         // Maximizing player's turn
         if (maximizingPlayer) {
@@ -194,13 +194,12 @@ public class TicTacToe {
         }
     }
 
-    // Checks if the game is over (win or draw)
+    // Checks if the game is over
     public boolean isGameOver() {
         return checkWin(PLAYER_X) || checkWin(PLAYER_O) || isBoardFull(); // Check win conditions or full board
     }
 
     // Main method to run the game
-// Main method to run the game
     public static void main(String[] args) {
         System.out.println("Perfect TicTacToe - Dominic Rucker\n");
         TicTacToe game = new TicTacToe(); // Create a new TicTacToe game instance
