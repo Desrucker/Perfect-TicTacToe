@@ -96,7 +96,7 @@ public class TicTacToe {
             }
         }
 
-        // Check main diagonal for a win
+        // Check both main diagonal and anti-diagonal for a win
         boolean mainDiagonalWin = true;
         boolean antiDiagonalWin = true;
 
@@ -145,7 +145,7 @@ public class TicTacToe {
             }
         }
 
-        // Make the best move found
+        // Place the AI's best move on the board
         if (bestMovePosition != -1) {
             int bestRowMove = bestMovePosition / SIZE; // Calculate row index
             int bestColumnMove = bestMovePosition % SIZE; // Calculate column index
@@ -157,7 +157,7 @@ public class TicTacToe {
     public int minimax(char[][] currentBoard, int depth, boolean maximizingPlayer) {
         char currentPlayer = maximizingPlayer ? PLAYER_O : PLAYER_X; // Determine current player
 
-        // Check for terminal states
+        // Check if the game has ended with a win or a draw
         if (checkWin(PLAYER_X)) return -1; // If X wins, return negative score
         if (checkWin(PLAYER_O)) return 1;  // If O wins, return positive score
         if (isBoardFull()) return 0;       // If it's a draw, return 0
@@ -196,7 +196,7 @@ public class TicTacToe {
 
     // Checks if the game is over
     public boolean isGameOver() {
-        // Check win conditions or full board
+        // Check if there is a win or if the board is full
         return checkWin(PLAYER_X) || checkWin(PLAYER_O) || isBoardFull();
     }
 
