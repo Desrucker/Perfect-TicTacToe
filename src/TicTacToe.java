@@ -127,8 +127,8 @@ public class TicTacToe {
     public void makeAIMove() {
         int bestScore = Integer.MIN_VALUE; // Initialize best score
         int bestMovePosition = -1; // Initialize best move position
-
         char currentPlayer = PLAYER_O; // Set AI player
+
         for (int position = 0; position < SIZE * SIZE; position++) {
             int row = position / SIZE; // Calculate row index
             int col = position % SIZE; // Calculate column index
