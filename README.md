@@ -19,21 +19,21 @@ A command-line **Tic-Tac-Toe** game in Java where the player faces off against a
 You play as **Player X**. Use the **reference board** below to select your move by entering a number between **0-8**:
 
 ```
-0 | 1 | 2
------------
-3 | 4 | 5
------------
-6 | 7 | 8
+ 0 | 1 | 2
+------------
+ 3 | 4 | 5
+------------
+ 6 | 7 | 8
 ```
 
 **Game Example:**
 
 ```
-X | O | X
------------
-O | X | -
------------
-- | O | X
+ X | O | X
+------------
+ O | X | -
+------------
+ - | O | X
 ```
 
 - The game ends when:
@@ -92,21 +92,6 @@ The AI always chooses the move with the highest score to maximize its chance of 
 
 ---
 
-## **Project Structure**
-
-```
-Perfect-TicTacToe/
-│
-├── src/
-│   ├── TicTacToe.java      # Main game logic
-│   └── .gitignore          # Ignored files and folders
-│
-├── out/                    # Compiled output (ignored by Git)
-└── README.md               # Project documentation
-```
-
----
-
 ## **Requirements**
 
 - **Java Development Kit (JDK)** 8 or later.
@@ -114,7 +99,7 @@ Perfect-TicTacToe/
 
 ---
 
-## **How to Modify the Game**
+## **Potential Improvements**
 
 Here are a few ideas for customization:
 1. **Change Board Size:**  
@@ -132,12 +117,6 @@ Here are a few ideas for customization:
    Allow two human players to play alternately.
 4. **Implement Undo Functionality:**  
    Keep track of moves to allow undo operations.
-
----
-
-## **Contributing**
-
-Contributions are welcome! Fork the repository, make your changes, and submit a **pull request**.
 
 ---
 
