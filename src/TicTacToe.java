@@ -201,8 +201,7 @@ public class TicTacToe {
 
     // Main method to run the game
     public static void main(String[] args) {
-        System.out.println("Perfect TicTacToe - Dominic Rucker");
-        System.out.println();
+        System.out.println("Perfect TicTacToe - Dominic Rucker\n");
         TicTacToe game = new TicTacToe(); // Create a new TicTacToe game instance
         Scanner scanner = new Scanner(System.in); // Scanner for user input
         game.printExampleBoard(); // Display example board
