@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TicTacToe {
@@ -17,8 +18,8 @@ public class TicTacToe {
 
     // Initializes the board to be empty
     private void initializeBoard() {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
+        for (int i = 0; i < SIZE; i++) { // Iterate through rows
+            for (int j = 0; j < SIZE; j++) { // Iterate through columns
                 board[i][j] = BLANK; // Set each cell to BLANK
             }
         }
@@ -26,8 +27,8 @@ public class TicTacToe {
 
     // Prints the current state of the board to the console
     public void printBoard() {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
+        for (int i = 0; i < SIZE; i++) { // Iterate through rows
+            for (int j = 0; j < SIZE; j++) { // Iterate through columns
                 System.out.print(board[i][j]); // Print the cell value
 
                 if (j < SIZE - 1) {
@@ -40,21 +41,20 @@ public class TicTacToe {
                 System.out.println("-----------"); // Print row separator
             }
         }
-
         System.out.println(); // Extra line for spacing
     }
 
     // Prints an example board using numbers instead of X and O
     public void printExampleBoard() {
-        for (int count = 0; count < SIZE * SIZE; count++) {
+        for (int count = 0; count < SIZE * SIZE; count++) { // Iterate through all positions
             System.out.print(count); // Print the position number
 
-            if ((count + 1) % SIZE != 0) {
+            if ((count + 1) % SIZE != 0) { // Check if it's not the end of a row
                 System.out.print(" | "); // Print column separator
             }
 
-            if ((count + 1) % SIZE == 0) {
-                System.out.println(); // Move to the next line after each row
+            if ((count + 1) % SIZE == 0) { // Check if it's the end of a row
+                System.out.println(); // Move to the next line
                 if (count < SIZE * SIZE - 1) {
                     System.out.println("-----------"); // Print row separator
                 }
@@ -70,7 +70,7 @@ public class TicTacToe {
             return false; // Invalid move
         }
 
-        // Place the player's symbol directly without calculating row and column separately
+        // Place the player's symbol on the board
         board[position / SIZE][position % SIZE] = player;
         return true; // Successful move
     }
@@ -203,49 +203,54 @@ public class TicTacToe {
     // Main method to run the game
     public static void main(String[] args) {
         System.out.println("Perfect TicTacToe - Dominic Rucker\n");
-        TicTacToe game = new TicTacToe(); // Create a new TicTacToe game instance
-        Scanner scanner = new Scanner(System.in); // Scanner for user input
-        game.printExampleBoard(); // Display example board
+        TicTacToe game = new TicTacToe(); // Create a new TicTacToe game
+        try (Scanner scanner = new Scanner(System.in)) { // Try-with-resources
 
-        // Main game loop
-        while (!game.isGameOver()) {
-            int position = -1;
-            boolean validMove = false;
+            game.printExampleBoard(); // Display example board
 
-            // Prompt user for their move
-            System.out.println("Your move (X):");
+            // Main game loop
+            while (!game.isGameOver()) {
+                int position = -1;
+                boolean validMove = false;
 
-            // Validate user input until a valid move is made
-            do {
-                System.out.print("What position (0-8)? ");
-                position = scanner.nextInt(); // Get user input
-                validMove = game.makeMove(position, PLAYER_X); // Try to make the move
-                if (!validMove) { // If move is invalid, prompt again
-                    System.out.println("That position is already taken.");
-                }
-            } while (!validMove);
-            System.out.println();
+                System.out.println("Your move (X):");
 
-            // Check if game is over after player's move
-            if (game.isGameOver()) break;
+                do {
+                    try {
+                        System.out.print("What position (0-8)? ");
+                        position = scanner.nextInt(); // Get user input
 
-            // AI makes its move
-            game.makeAIMove();
+                        if (position < 0 || position >= 9) {
+                            System.out.println("Out of range, please enter a number between 0 and 8.");
+                            continue;
+                        }
 
-            // Print the current board state
-            game.printBoard();
+                        validMove = game.makeMove(position, PLAYER_X); // Attempt move
+                        if (!validMove) {
+                            System.out.println("That position is already taken. Try again.");
+                        }
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input, please enter a number between 0 and 8.");
+                        scanner.nextLine(); // Clear invalid input
+                    }
+                } while (!validMove); // Repeat until a valid move is made
+
+                System.out.println();
+
+                if (game.isGameOver()) break; // Exit if game is over
+
+                game.makeAIMove(); // Make AI move
+                game.printBoard(); // Display updated board
+            }
+
+            // Display game result
+            if (game.checkWin(PLAYER_X)) {
+                System.out.println("Player X wins!");
+            } else if (game.checkWin(PLAYER_O)) {
+                System.out.println("Player O wins!");
+            } else {
+                System.out.println("It's a draw!");
+            }
         }
-
-        // Determine the result of the game
-        if (game.checkWin(PLAYER_X)) {
-            System.out.println("Player X wins");
-        } else if (game.checkWin(PLAYER_O)) {
-            System.out.println("Player O wins");
-        } else {
-            System.out.println("It's a draw");
-        }
-
-        // Close the scanner
-        scanner.close();
     }
 }
